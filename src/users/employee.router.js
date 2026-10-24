@@ -3,7 +3,9 @@ import express from "express";
 import usersController from "./employee.controller.js";
 import avatarRoutes from "./avatar/avatar.route.js";
 import { user } from "./employee.model.js";
-
+import announcementRoutes from "../routes/announcement.routes.js";
+import notificationRoutes from "../routes/notification.routes.js";
+import auditLogRoutes from "../routes/auditLog.routes.js";
 import { authenticate } from "../../middleware/authenticate.js";
 import { allowRoles } from "../../middleware/role.middleware.js";
 
@@ -58,7 +60,9 @@ router.get(
 
 // Avatar routes
 router.use("/avatar", avatarRoutes);
-
+router.use("/announcements", announcementRoutes);
+router.use("/notifications", notificationRoutes);
+router.use("/audit-logs", auditLogRoutes);
 // User routes
 router.post("/employee", usersController.createuser);
 router.post("/login", usersController.login);

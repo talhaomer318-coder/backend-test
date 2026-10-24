@@ -6,7 +6,7 @@ import Contact from "./contact.model.js";
 import sendEmail from "./config/transporter.js";
 import { signupSchema } from "./validator.js";
 import { accesstoken, refreshtoken } from "../../token.js";
-
+import { createAuditLog } from "../services/auditLog.service.js";
 
 const createuser = async (req, res) => {
   try {
@@ -37,7 +37,30 @@ const createuser = async (req, res) => {
       password,
     });
 
-    return res.status(201).send({ message: "User created successfully", data: user });
+    let auditLogCreated = true;
+    try {
+      await createAuditLog({
+        actor: user._id,
+        action: "CREATE",
+        entity: "Employee",
+        entityId: user._id,
+        after: {
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
+    } catch (error) {
+      auditLogCreated = false;
+      console.error("Failed to create audit log:", error);
+    }
+
+    return res.status(201).send({
+      message: auditLogCreated
+        ? "User created successfully"
+        : "User created successfully, but audit logging failed",
+      data: user,
+    });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
