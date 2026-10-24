@@ -8,7 +8,6 @@ import { user } from "./users.model.js";
 const router = express.Router();
 
 router.use("/avatar", avatarRoutes);
-
 router.post("/users", usersController.createuser);
 router.post("/login", usersController.login);
 router.post("/contact", usersController.sendContactEmail);
@@ -45,6 +44,5 @@ router.get("/pagination", async (req, res, next) => {
     next(error);
   }
 });
-
 
 export default router;

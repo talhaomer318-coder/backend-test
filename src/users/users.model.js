@@ -15,11 +15,11 @@ const users =  new Schema({
            required:true,
 
     },
-    role:{
-        type:String,
-        default:"user",
-        enum:["user","admin"]
-    },
+role: {
+  type: String,
+  default: "user",
+  enum: ["user", "admin", "hr"]
+},
 verified: {
   type: Boolean,
   default: false,

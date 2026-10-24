@@ -7,9 +7,7 @@ import cors from "cors";
 import errorHandler from "./middleware/errorhandle.js";
 
 
-
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 3004;
 
@@ -35,7 +33,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 // Register routes
 app.use("/v1", router);
 
