@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import errorHandler from "./middleware/errorhandle.js";
 
+
+
 dotenv.config();
 
 const app = express();

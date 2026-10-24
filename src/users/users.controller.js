@@ -5,7 +5,7 @@ import crypto from "crypto";
 import Contact from "./contact.model.js";
 import sendEmail from "./config/transporter.js";
 import { signupSchema } from "./validator.js";
-import { accesstoken, refreshtoken } from "../../utils/token.js";
+import { accesstoken, refreshtoken } from "../../token.js";
 
 
 const createuser = async (req, res) => {

@@ -8,7 +8,7 @@ export const accesstoken = (user) => {
     },
     process.env.accesstokenkey,
     {
-      expiresIn: "1m", // fixed casing
+      expiresIn: "15m", // fixed casing
     }
   );
 };

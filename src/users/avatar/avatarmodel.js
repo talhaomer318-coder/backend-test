@@ -3,16 +3,12 @@ import mongoose from "mongoose";
 
 const avatarSchema = new mongoose.Schema(
   {
-    filename: {
+    imageUrl: {
       type: String,
       required: true,
     },
-    contentType: {
+    publicId: {
       type: String,
-      required: true,
-    },
-    image: {
-      type: Buffer,
       required: true,
     },
   },
