@@ -17,8 +17,8 @@ const users =  new Schema({
     },
 role: {
   type: String,
-  default: "user",
-  enum: ["user", "admin", "hr"]
+  default: "employee",
+  enum: ["employee", "admin", "hr"]
 },
 verified: {
   type: Boolean,

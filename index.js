@@ -1,7 +1,7 @@
 
 import express from "express";
 import connnectDB from "./DB/mongose.connect.js";
-import router from "./src/users/users.router.js";
+import router from "./src/users/employee.router.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import errorHandler from "./middleware/errorhandle.js";
