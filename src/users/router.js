@@ -8,14 +8,12 @@ import notificationRoutes from "../routes/notification.routes.js";
 import auditLogRoutes from "../routes/auditLog.routes.js";
 import { authenticate } from "../../middleware/authenticate.js";
 import { allowRoles } from "../../middleware/role.middleware.js";
-
-// In controllers ko apni actual file location ke mutabiq import karein.
-// Example:
-// import {
-//   adminController,
-//   employeesController,
-//   profileController,
-// } from "./users.controller.js";
+import dashboardRoutes from "../dashboard/dashboard.routes.js";
+import payrollRoutes from "../payroll.routes.js";
+import leaveRoutes from "../leave.routes.js";
+import attendanceRoutes from "../attendance/attendance.routes.js";
+import setupRoutes from "../setup/setuproutes.js";
+import employeeManagementRoutes from "../employees/emploeemanager.routes.js";
 
 const router = express.Router();
 
@@ -58,7 +56,13 @@ router.get(
   }
 );
 
+router.use("/employees", employeeManagementRoutes);
+router.use("/setup", setupRoutes);
+router.use("/attendance", attendanceRoutes);
+router.use("/leaves", leaveRoutes);
+router.use("/payroll", payrollRoutes);
 // Avatar routes
+router.use("/dashboard", dashboardRoutes);
 router.use("/avatar", avatarRoutes);
 router.use("/announcements", announcementRoutes);
 router.use("/notifications", notificationRoutes);
