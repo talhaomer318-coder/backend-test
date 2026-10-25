@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 import Leave from "./leave.model.js";
-import { createAuditLog } from "./services/auditLog.service.js";
+import { createAuditLog } from "../services/auditLog.service.js";
 
 const validObjectId = (id) => mongoose.isValidObjectId(id);
 

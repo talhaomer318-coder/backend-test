@@ -1,6 +1,6 @@
 import express from "express";
-import { authenticate } from "../middleware/authenticate.js";
-import { allowRoles } from "../middleware/role.middleware.js";
+import { authenticate } from "../../middleware/authenticate.js";
+import { allowRoles } from "../../middleware/role.middleware.js";
 import payrollController from "./payrollcontroller.js";
 
 const router = express.Router();

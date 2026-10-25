@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 import Payroll from "./payroll.model.js";
-import { createAuditLog } from "./services/auditLog.service.js";
+import { createAuditLog } from "../services/auditLog.service.js";
 
 // Admin/HR: Create monthly payroll
 const createPayroll = async (req, res) => {

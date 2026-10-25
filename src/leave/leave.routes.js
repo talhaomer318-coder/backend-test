@@ -1,8 +1,8 @@
 
 import express from "express";
 import leaveController from "./leave.controller.js";
-import { authenticate } from "../middleware/authenticate.js";
-import { allowRoles } from "../middleware/role.middleware.js";
+import { authenticate } from "../../middleware/authenticate.js";
+import { allowRoles } from "../../middleware/role.middleware.js";
 
 const router = express.Router();
 
