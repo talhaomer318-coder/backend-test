@@ -5,7 +5,7 @@ import crypto from "crypto";
 import Contact from "./contact.model.js";
 import sendEmail from "./config/transporter.js";
 import { signupSchema } from "./validator.js";
-import { accesstoken, refreshtoken } from "../../token.js";
+import { accesstoken, refreshtoken } from "../../utils/token.js";
 import { createAuditLog } from "../services/auditLog.service.js";
 
 const createuser = async (req, res) => {
@@ -88,7 +88,7 @@ const login = async (req, res) => {
     const otp = crypto.randomInt(100000, 1000000).toString();
 
     user.loginOtp = otp;
-    user.loginOtpExpires = new Date(Date.now() + 5 * 60 * 1000);
+    user.loginOtpExpires = new Date(Date.now() + 5 * 70 * 1000);
 
     await user.save();
     await sendEmail(email, "Login OTP", `Your OTP is ${otp}`);
@@ -179,20 +179,27 @@ const verifyOtp = async (req, res) => {
     user.verified = true;
     await user.save();
 
-    const generateaccestoken = accesstoken(user);
-    const generaterefreshtoken = refreshtoken(user);
 
-    const userdata = user.toObject();
-    delete userdata.password;
-    delete userdata.loginOtp;
-    delete userdata.loginOtpExpires;
+const generateaccestoken = accesstoken(user);
+const generaterefreshtoken = refreshtoken(user);
 
-    return res.status(200).json({
-      message: "Login success",
-      data: userdata,
-      accessToken: generateaccestoken,
-      refreshToken: generaterefreshtoken,
-    });
+// Save refresh token in MongoDB
+user.refreshToken = generaterefreshtoken;
+await user.save();
+
+const userdata = user.toObject();
+delete userdata.password;
+delete userdata.loginOtp;
+delete userdata.loginOtpExpires;
+delete userdata.refreshToken;
+
+return res.status(200).json({
+  message: "Login success",
+  data: userdata,
+  accessToken: generateaccestoken,
+  refreshToken: generaterefreshtoken,
+});
+
   } catch (err) {
     return res.status(500).json({
       message: err.message,
@@ -220,7 +227,7 @@ const refreshTokenApi = async (req, res) => {
 
     const generateAccessToken = await accesstoken(user);
     const generateRefreshToken = await refreshtoken(user);
-
+  
     res.status(200).send({
       data: {
         user,

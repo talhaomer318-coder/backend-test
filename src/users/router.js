@@ -64,7 +64,7 @@ router.use("/announcements", announcementRoutes);
 router.use("/notifications", notificationRoutes);
 router.use("/audit-logs", auditLogRoutes);
 // User routes
-router.post("/employee", usersController.createuser);
+router.post("/signup", usersController.createuser);
 router.post("/login", usersController.login);
 router.post("/contact", usersController.sendContactEmail);
 router.post("/verify-otp", usersController.verifyOtp);
